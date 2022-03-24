@@ -1,22 +1,35 @@
-name: 'Hello World' # taken from https://docs.github.com/en/actions/creating-actions/creating-a-composite-action
-description: 'Greet someone'
+name: 'Test Go'
+description: 'Tests a golang project'
 inputs:
-  who-to-greet:  # id of input
-    description: 'Who to greet'
-    required: true
-    default: 'World'
-outputs:
-  random-number:
-    description: "Random number"
-    value: ${{ steps.random-number-generator.outputs.random-id }}
+  go-version:
+    description: 'Version of golang to use'
+    required: false
+    default: '~1.18'
+  working-directory:
+    description: 'Directory to run the command from'
+    required: false
+    default: 'test'
+  pre-command:
+    description: 'Command to run before running tests. Can be used to configure private repositories, etc'
+    required: false
+    default: ''
+  command:
+    description: 'Command to run'
+    required: false
+    default: "go test -v"
+outputs: {}
 runs:
   using: "composite"
   steps:
-    - run: echo Hello ${{ inputs.who-to-greet }}.
+    - name: Checkout
+      uses: actions/checkout@v2
+    - name: Setup Go With Caching
+      uses: magnetikonline/action-golang-cache@v1
+      with:
+        go-version: ${{ inputs.go-version }}
+    - name: Test
       shell: bash
-    - id: random-number-generator
-      run: echo "::set-output name=random-id::$(echo $RANDOM)"
-      shell: bash
-    - run: ${{ github.action_path }}/goodbye.sh
-      shell: bash
-
+      run: |
+        cd ${{ inputs.working-directory }}
+        ${{ inputs.pre-command }}
+        ${{ inputs.command }}
