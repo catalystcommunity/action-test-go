@@ -40,20 +40,20 @@ Greet someone
 ### Example usage
 
 ```yaml
-on: [push]
-
+on:
+  pull_request:
+    branches:
+      - main
 jobs:
-  hello_world_job:
+  test:
+    if: github.event.pull_request.draft == false
+    name: Test
     runs-on: ubuntu-latest
-    name: A job to say hello
     steps:
-      - uses: actions/checkout@v2
-      - id: foo
-        uses: actions/hello-world-composite-action@v1
+      - uses: crazy-max/ghaction-dump-context@v1
+      - uses: catalystsquad/action-test-go@v1
         with:
-          who-to-greet: "Mona the Octocat"
-      - run: echo random-number ${{ steps.foo.outputs.random-number }}
-        shell: bash
+          pre-command: git config --global url."https://${{ secrets.AUTOMATION_PAT }}@github.com".insteadOf "https://github.com"
 ```
 
 <!-- end examples -->
