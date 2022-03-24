@@ -1,3 +1,10 @@
+# 1.0.0 (2022-03-24)
+
+
+### Bug Fixes
+
+* Initial commit ([#1](https://github.com/catalystsquad/action-test-go/issues/1)) ([406cad8](https://github.com/catalystsquad/action-test-go/commit/406cad890d26ed3d891aef92b55d4cd7a49d55aa))
+
 # 1.0.0 (2022-02-28)
 
 

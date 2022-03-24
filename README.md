@@ -1,11 +1,11 @@
 <!-- start title -->
 
-# GitHub Action:Hello World
+# GitHub Action:Test Go
 
 <!-- end title -->
 <!-- start description -->
 
-Greet someone
+Tests a golang project
 
 <!-- end description -->
 <!-- start contents -->
@@ -13,19 +13,35 @@ Greet someone
 <!-- start usage -->
 
 ```yaml
-- uses: catalystsquad/action-composite-action-template@undefined
+- uses: catalystsquad/action-test-go@undefined
   with:
-    # Who to greet
-    # Default: World
-    who-to-greet: ""
+    # Version of golang to use
+    # Default: ~1.18
+    go-version: ""
+
+    # Directory to run the command from
+    # Default: test
+    working-directory: ""
+
+    # Command to run before running tests. Can be used to configure private
+    # repositories, etc
+    # Default:
+    pre-command: ""
+
+    # Command to run
+    # Default: go test -v
+    command: ""
 ```
 
 <!-- end usage -->
 <!-- start inputs -->
 
-| **Input**          | **Description** | **Default** | **Required** |
-| :----------------- | :-------------- | :---------: | :----------: |
-| **`who-to-greet`** | Who to greet    |   `World`   |   **true**   |
+| **Input**               | **Description**                                                                         | **Default**  | **Required** |
+| :---------------------- | :-------------------------------------------------------------------------------------- | :----------: | :----------: |
+| **`go-version`**        | Version of golang to use                                                                |   `~1.18`    |  **false**   |
+| **`working-directory`** | Directory to run the command from                                                       |    `test`    |  **false**   |
+| **`pre-command`**       | Command to run before running tests. Can be used to configure private repositories, etc |              |  **false**   |
+| **`command`**           | Command to run                                                                          | `go test -v` |  **false**   |
 
 <!-- end inputs -->
 <!-- start outputs -->
