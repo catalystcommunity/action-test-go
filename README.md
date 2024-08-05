@@ -13,7 +13,7 @@ Tests a golang project
 <!-- start usage -->
 
 ```yaml
-- uses: catalystsquad/action-test-go@undefined
+- uses: catalystcommunity/action-test-go@undefined
   with:
     # Version of golang to use
     # Default: ~1.18
@@ -67,7 +67,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: crazy-max/ghaction-dump-context@v1
-      - uses: catalystsquad/action-test-go@v1
+      - uses: catalystcommunity/action-test-go@v1
         with:
           pre-command: git config --global url."https://${{ secrets.AUTOMATION_PAT }}@github.com".insteadOf "https://github.com"
 ```
